@@ -6,7 +6,8 @@ RSpec.describe Validators::FileValidator do
   let(:files_dir) { File.join Dir.pwd, 'spec', 'support', 'data' }
   let(:file_path) { File.join files_dir, 'valid.log' }
   let(:file_ext) { '.log' }
-  let(:error_prefix) { 'File validation failed:' }
+  let(:error_prefix) { "File validation failed! #{file_name}:" }
+  let(:file_name) { File.basename(file_path) }
 
   describe '#validate' do
     subject { Validators::FileValidator.validate(file_path: file_path, file_format: file_ext) }
@@ -18,7 +19,7 @@ RSpec.describe Validators::FileValidator do
     end
 
     context 'when a file does not exist' do
-      let(:file_path) { '' }
+      let(:file_path) { 'not_existing.file' }
 
       it 'raise error' do
         expect { subject }.to raise_error "#{error_prefix} File not found."

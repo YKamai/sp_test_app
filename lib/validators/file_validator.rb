@@ -16,7 +16,8 @@ module Validators
     def validate_file
       return true if valid_file?
 
-      raise StandardError, "File validation failed: #{message}"
+      raise StandardError,
+        "File validation failed! #{File.basename(file_path)}: #{message}"
     end
 
     private

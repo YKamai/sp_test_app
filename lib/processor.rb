@@ -7,14 +7,18 @@ class Processor
     @analyzer = analyzer
   end
 
-  def run(file_path)
-    entries = File.readlines(file_path).map do |line|
-      entry_builder.build(line)
-    end
+  def run(file_paths)
+    entries = file_paths.map do |file_path|
+      entries_from_file(file_path)
+    end.flatten
     analyzer.run entries
   end
 
   private
+
+  def entries_from_file(file_path)
+    File.readlines(file_path).map {|line| entry_builder.build(line) }
+  end
 
   attr_reader :entry_builder, :analyzer
 end

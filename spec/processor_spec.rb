@@ -10,12 +10,17 @@ RSpec.describe Processor do
   end
 
   describe '#run' do
-    let(:file_path) { File.join Dir.pwd, 'spec', 'support', 'data', '2_entries.log' }
+    let(:file_paths) do
+      [
+        File.join(Dir.pwd, 'spec', 'support', 'data', '2_entries.log'),
+        File.join(Dir.pwd, 'spec', 'support', 'data', '2_entries.log')
+      ]
+    end
 
     it 'calls entry_builder for each file line and runs analyser once' do
       expect(analyzer).to receive(:run).once
-      expect(entry_builder).to receive(:build).twice
-      subject.run(file_path)
+      expect(entry_builder).to receive(:build).exactly(4).times
+      subject.run(file_paths)
     end
   end
 end
