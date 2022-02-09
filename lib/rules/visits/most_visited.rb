@@ -9,9 +9,9 @@ module Rules
         pages = visits_list.map(&:page).reject(&:empty?)
         sorted_result = pages.tally.sort_by { |_, number| -number }
         Rules::Outcome.new(
-          header: 'Ordered list of webpages with most page views',
+          header: I18n.t('rules.most_visited.header'),
           data: sorted_result,
-          print_template: '%s %d visits'
+          print_template: I18n.t('rules.most_visited.template')
         )
       end
     end

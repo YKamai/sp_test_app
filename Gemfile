@@ -15,3 +15,5 @@ group :test do
   gem 'rspec', '3.10'
   gem 'simplecov', '0.21.2'
 end
+
+gem 'i18n', '1.9.1'

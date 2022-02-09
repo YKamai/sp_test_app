@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative 'lib/config/localization'
+
 require_relative 'lib/analyzer'
 require_relative 'lib/log_parser'
 require_relative 'lib/printer'

@@ -1,0 +1,8 @@
+en:
+  rules:
+    most_unique_visited:
+      header: Ordered list of webpages with most unique page views
+      template: "%s %d unique views"
+    most_visited:
+      header: Ordered list of webpages with most page views
+      template: "%s %d visits"

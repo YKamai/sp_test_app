@@ -11,9 +11,9 @@ module Rules
           [page, page_visits.map(&:ip_address).uniq.length]
         end
         Rules::Outcome.new(
-          header: 'Ordered list of webpages with most unique page views',
+          header: I18n.t('rules.most_unique_visited.header'),
           data: unique_visits.sort_by { |_, number| -number },
-          print_template: '%s %d unique views'
+          print_template: I18n.t('rules.most_unique_visited.template')
         )
       end
     end
