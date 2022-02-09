@@ -12,13 +12,14 @@ require_relative 'lib/rules/outcome'
 require_relative 'lib/rules/visits/most_unique_visited'
 require_relative 'lib/rules/visits/most_visited'
 require_relative 'lib/validators/file_validator'
+require_relative 'lib/validators/visits_file_validator'
 
 file_path = ARGV.first
 visits_analyzer = Analyzer.new [Rules::Visits::MostVisited, Rules::Visits::MostUniqueVisited]
 visits_processor = Processor.new entry_builder: EntryBuilders::VisitBuilder, analyzer: visits_analyzer
 LogParser.new(
   file_path: file_path,
-  file_validator: Validators::FileValidator,
+  file_validator: Validators::VisitsFileValidator,
   processor: visits_processor,
   printer: Printer.new
 ).run
