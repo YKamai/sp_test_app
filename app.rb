@@ -9,12 +9,19 @@ require_relative 'lib/entry_builders/builder'
 require_relative 'lib/entry_builders/visit_builder'
 require_relative 'lib/rules/base_rule'
 require_relative 'lib/rules/outcome'
+require_relative 'lib/rules/visits/average_visits'
+require_relative 'lib/rules/visits/average_unique_visits'
 require_relative 'lib/rules/visits/most_unique_visited'
 require_relative 'lib/rules/visits/most_visited'
 require_relative 'lib/validators/file_validator'
 
 file_path = ARGV.first
-visits_analyzer = Analyzer.new [Rules::Visits::MostVisited, Rules::Visits::MostUniqueVisited]
+visits_analyzer = Analyzer.new [
+  Rules::Visits::MostVisited,
+  Rules::Visits::MostUniqueVisited,
+  Rules::Visits::AverageVisits,
+  Rules::Visits::AverageUniqueVisits
+]
 visits_processor = Processor.new entry_builder: EntryBuilders::VisitBuilder, analyzer: visits_analyzer
 LogParser.new(
   file_path: file_path,

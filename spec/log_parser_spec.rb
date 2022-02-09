@@ -5,7 +5,11 @@ require_relative File.join(Dir.pwd, 'spec/support/spec_helper')
 RSpec.describe LogParser do
   let(:file_path) { File.join Dir.pwd, 'spec', 'support', 'data', 'valid.log' }
   let(:visits_processor) do
-    visits_analyzer = Analyzer.new [Rules::Visits::MostVisited, Rules::Visits::MostUniqueVisited]
+    visits_analyzer = Analyzer.new [
+      Rules::Visits::MostVisited,
+      Rules::Visits::MostUniqueVisited,
+      Rules::Visits::AverageVisits
+    ]
     Processor.new entry_builder: EntryBuilders::VisitBuilder, analyzer: visits_analyzer
   end
   subject do
@@ -31,6 +35,8 @@ RSpec.describe LogParser do
         "/home 1 unique views\n"\
         "/about/2 1 unique views\n"\
         "/index 1 unique views\n\n"\
+        "Average number of page visits:\n"\
+        "1 visits\n\n"
     end
 
     it 'output the result' do
